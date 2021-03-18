@@ -1,0 +1,75 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css";
+
+.container {
+    display: flex;
+}
+
+.configMenu {
+    background: #ecc6d8;
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.input {
+    background: #f9ecf2;
+    width: 80%;
+    margin: 1em auto 1em 10px;
+}
+
+.button {
+    margin: 5em;
+}
+
+label {
+    width: 20%;
+    margin-bottom: 10px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 80%;
+    height: 15px;
+    border-radius: 5px;
+    background: #862d59;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    background: #262673;
+    cursor: round;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #262673;
+    cursor: pointer;
+}
+
+body {
+    background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
+    font-family: 'Indie Flower', cursive;
+    font-size: 20px;
+    font-weight: bold;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Trees</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 class="title is-1 is-spaced">L-System trees generator</h1>
+    <div class='container is-fluid'>
+        <div class='tile is-ancestor'>
+            <div class='tile is-1'></div>
+            <div class='tile is-5 is-parent'>
+                <div class='tile is-child'>
+                    <div class='configMenu'>
+                        <div class='input is-medium'>
+                            <label for='preset'>Presets :</label>
+                            <input type='range' id='preset' class='slider' min='0' max='3' step='1' value='0' onchange='choosePreset()'/>
+                        </div>
+                        <h2 class='title is-3'>Leaves</h2>
+                        <input type='color' id='leafColor' class='input' value='#1c852b' onchange='changeLeafColor()'> 
+                        <div class='input is-medium'>
+                            <label for='leafLen'>Lenght :</label>
+                            <input type='range' id='leafLen' class='slider' min='1' max='5' step='0.5' onchange='changeLeafLenght()'/>
+                        </div>
+                        <div class='input is-medium'>
+                            <label for='leafWidth'>Width :</label>
+                            <input type='range' id='leafWidth' class='slider' min='1' max='5' step='0.5' onchange='changeLeafWidth()'/>
+                        </div>
+                        <h2 class='title is-3'>Branches</h2>
+                        <input type='color' id='branchColor' class='input' value='#8c404b' onchange='changeBranchColor()'>
+                        <div class='input is-medium'>
+                            <label for='branchAlpha'>Alpha :</label>
+                            <input type='range' id='branchAlpha' class='slider' min='0.' max='1' step='0.1' onchange='changeBranchAlpha()'/>
+                        </div>
+                        <div class='input is-medium'>
+                            <label for='branchLen'>Lenght :</label>
+                            <input type='range' id='branchLen' class='slider' min='0.5' max='100' step='0.5' value='30.0' onchange='changeLen()'/>
+                        </div>
+                        <div class='input is-medium'>
+                            <label for='branchRatio'>Ratio :</label>
+                            <input type='range' id='branchRatio' class='slider' min='0.1' max='1.0' step='0.01' value='0.75' onchange='changeRatio()'/>
+                        </div>
+                        <div class='input is-medium'>
+                            <label for='branchWidth'>Width :</label>
+                            <input type='range' id='branchWidth' class='slider' min='0.1' max='10.0' step='0.1' value='1.0' onchange='changeWidth()'/>
+                        </div>
+                        <div class='input is-medium'>
+                            <label for='branchAngle'>Angle :</label>
+                            <input type='range' id='branchAngle' class='slider' min='0.1' max='90' step='0.5' value='22.5' onchange='changeAngle()'/>
+                        </div>
+                        <div class='buttons'>
+                            <button class='button is-danger is-light' onclick='generateSentence()'>Generate</button>
+                            <button class='button is-danger is-light' onclick='resetCanvas()'>Reset</button>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class='tile is-1'></div>
+                <div class='tile is-4 is-parent'>
+                    <div class='tile is-child'>
+                        <canvas id='canvas' width='1000' height='800'></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class='configMenu'>
+            <div class='input is-medium'>
+                <label for='preset'>Presets :</label>
+                <input type='range' id='preset' class='slider' min='0' max='3' step='1' value='0' onchange='choosePreset()'/>
+            </div>
+            <h2 class='title is-3'>Leaves</h2>
+            <input type='color' id='leafColor' class='input' value='#1c852b' onchange='changeLeafColor()'> 
+            <div class='input is-medium'>
+                <label for='leafLen'>Lenght :</label>
+                <input type='range' id='leafLen' class='slider' min='1' max='5' step='0.5' onchange='changeLeafLenght()'/>
+            </div>
+            <div class='input is-medium'>
+                <label for='leafWidth'>Width :</label>
+                <input type='range' id='leafWidth' class='slider' min='1' max='5' step='0.5' onchange='changeLeafWidth()'/>
+            </div>
+            <h2 class='title is-3'>Branches</h2>
+            <input type='color' id='branchColor' class='input' value='#8c404b' onchange='changeBranchColor()'>
+            <div class='input is-medium'>
+                <label for='branchAlpha'>Alpha :</label>
+                <input type='range' id='branchAlpha' class='slider' min='0.' max='1' step='0.1' onchange='changeBranchAlpha()'/>
+            </div>
+            <div class='input is-medium'>
+                <label for='branchLen'>Lenght :</label>
+                <input type='range' id='branchLen' class='slider' min='0.5' max='100' step='0.5' value='30.0' onchange='changeLen()'/>
+            </div>
+            <div class='input is-medium'>
+                <label for='branchRatio'>Ratio :</label>
+                <input type='range' id='branchRatio' class='slider' min='0.1' max='1.0' step='0.01' value='0.75' onchange='changeRatio()'/>
+            </div>
+            <div class='input is-medium'>
+                <label for='branchWidth'>Width :</label>
+                <input type='range' id='branchWidth' class='slider' min='0.1' max='10.0' step='0.1' value='1.0' onchange='changeWidth()'/>
+            </div>
+            <div class='input is-medium'>
+                <label for='branchAngle'>Angle :</label>
+                <input type='range' id='branchAngle' class='slider' min='0.1' max='90' step='0.5' value='22.5' onchange='changeAngle()'/>
+            </div>
+            <button class='button' onclick='generateSentence()'>Generate</button>
+            <button class='button' onclick='resetCanvas()'>Reset</button>
+        </div>
+        <canvas id='canvas' width='1000' height='800'></canvas>
+        -->
+        
+        <script src='lsysttrees.js'></script> 
+    </div>
+    <!-- 
+    type="module"
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <div>
+        <input type="range" id="rotateAngle" name="rotateAngle" min="0" max="360" value="22.5" step=".5" onchange="changeAngle(this.value)">
+        <label for="rotateAngle">Change Angle.</label>
+        <input type="range" id="changeLen" name="changeLen" min="40" max="100" value="40" step="1" onchange="changeLen(this.value)">
+        <label for="changeLen">Change Lenght.</label>
+    </div>
+    
+    <script src='trees.js'></script>
+    <script src='trees2.js'></script>
+    -->
+</body>
+</html>
